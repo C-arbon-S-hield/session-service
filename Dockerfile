@@ -9,7 +9,7 @@ COPY $PWD /session-service
 WORKDIR /session-service
 RUN mvn package -DskipTests -Dpackaging.type=jar
 
-FROM eclipse-temurin:21
+FROM eclipse-temurin:21-alpine
 # copy over target/session_service-x.y.z.jar ignore *-model.jar, that jar is
 # used by cbioportal/cbioportal to import the models
 COPY --from=build /session-service/target/*[0-9].jar /app.war
