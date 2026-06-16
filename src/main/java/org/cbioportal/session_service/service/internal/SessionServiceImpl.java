@@ -143,10 +143,10 @@ public class SessionServiceImpl implements SessionService {
     @Override
     public Session getSession(String source, SessionType type, String id) throws SessionNotFoundException {
         Session session = sessionRepository.findOneBySourceAndTypeAndId(source, type, id);
-        if (session != null) {
-            return session;
+        if (session == null) {
+            throw new SessionNotFoundException(id);
         }
-        throw new SessionNotFoundException(id);
+        return session;
     }
 
     @Override
